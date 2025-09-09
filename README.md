@@ -1,11 +1,9 @@
-# ProjEngSoftware
+## Integrantes: <br/>
+  - Luiz Felipe 170.294 <br/>
+  - Laura Tomasin Barbosa 163.884 <br/>
+  - Rafael da Rocha 163.973 <br/>
+  - Reberth Kelvin 141.589 <br/>
+  - Emanuella Santos 163.696 <br/>
 
-Integrantes:
-  Luiz Felipe 170294
-  Laura Tomasin Barbosa 163884
-  Rafael da Rocha 163973
-  Reberth Kelvin 141589
-  Emanuella Santos 163696
-
-Projeto:
-  Sistema integrado com IA para predizer a chance de estudante universitário ter depressão
+## Projeto:
+  Sistema integrado com IA para predizer a chance de estudante universitário ter depressão.
