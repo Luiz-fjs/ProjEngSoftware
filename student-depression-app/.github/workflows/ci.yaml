@@ -1,4 +1,4 @@
-name: "CI Pipeline"
+name: "CI Pipeline - Next.JS App - Reberth, Laura, Luiz, Rafael"
 on:
   pull_request:
     types: [opened, synchronize, reopened] 
