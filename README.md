@@ -10,7 +10,7 @@
 
   
 ## Tech Stack
-  ### Front-end:
+  #### Front-end:
 | Tecnologia | Versão | Descrição |
 |------------|--------|-----------|
 | **Next.js** | 15.3.4 | Framework React com SSR e otimizações automáticas |
@@ -20,7 +20,7 @@
 | **Material Icons** | 1.13.14 | Biblioteca de ícones do Google Material Design |
 | **Node.js** | 18+ | Ambiente de execução JavaScript |
 
-  ### Backend:
+  #### Backend:
 | Tecnologia | Versão | Descrição |
 |------------|--------|-----------|
 | **FastAPI** | 0.116.1 | Framework web moderno e de alta performance |
@@ -32,9 +32,20 @@
 | **joblib** | 1.5.1 | Persistência de modelos ML |
 
 
-## 🔧 Configuração e Execução
+###  Arquitetura do Sistema
 
-### 🎨 Frontend (Desenvolvimento)
+Arquitetura baseada Arquitetura Limpa e de monorepo
+```
+TerappIA/
+├── terappIA-frontend/          
+├── terappIA-api/    
+└── README.md                  
+```
+
+
+### Configuração e Execução
+
+#### Frontend (Desenvolvimento)
 
 ```bash
 cd terappIA-frontend/
@@ -52,7 +63,7 @@ npm run build
 npm start
 ```
 
-### ⚙️ Backend (Desenvolvimento)
+#### Backend (Desenvolvimento)
 
 ```bash
 cd terappIA-api/
