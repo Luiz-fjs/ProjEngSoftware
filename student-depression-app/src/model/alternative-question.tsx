@@ -2,7 +2,7 @@ import React from 'react';
 import { QuestionBase } from './question-base';
 import { QuestionBaseInterface, onResponseCallbackInterface } from './interfaces';
 
-interface AlternativeQuestionInterface extends QuestionBaseInterface {
+export interface AlternativeQuestionInterface extends QuestionBaseInterface {
     alternatives: string[];
     labels: string[];
 }

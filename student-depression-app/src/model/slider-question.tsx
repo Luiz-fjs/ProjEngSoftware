@@ -2,7 +2,7 @@ import React from 'react';
 import { QuestionBase } from './question-base';
 import { QuestionBaseInterface, onResponseCallbackInterface } from './interfaces';
 
-interface SliderQuestionInterface extends QuestionBaseInterface {
+export interface SliderQuestionInterface extends QuestionBaseInterface {
     min?: number;
     max?: number;
     step?: number;

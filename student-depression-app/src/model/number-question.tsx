@@ -2,7 +2,7 @@ import React from 'react';
 import { QuestionBase } from './question-base';
 import { QuestionBaseInterface, onResponseCallbackInterface } from './interfaces';
 
-interface NumberQuestionInterface extends QuestionBaseInterface {
+export interface NumberQuestionInterface extends QuestionBaseInterface {
     placeholder: string;
     min: number;
     max: number;

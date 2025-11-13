@@ -2,7 +2,7 @@ import React from 'react';
 import { QuestionBase } from './question-base';
 import { QuestionBaseInterface, onResponseCallbackInterface } from './interfaces';
 
-interface DateQuestionInterface extends QuestionBaseInterface {
+export interface DateQuestionInterface extends QuestionBaseInterface {
     min?: string;
     max?: string;
 }
