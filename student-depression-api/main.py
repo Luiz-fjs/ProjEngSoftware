@@ -5,12 +5,15 @@ from pydantic import BaseModel, Field
 import joblib
 from pathlib import Path
 import pandas as pd
+from src.model.model import router as model_router
 
 origins = [
         "http://localhost:3000"
     ]
 
 app = FastAPI()
+
+app.include_router(model_router, prefix="/model", tags=["Model"])
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,3 +41,5 @@ async def get_questions():
         return questions
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao ler questions.json: {str(e)}")
+
+
