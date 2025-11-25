@@ -1,6 +1,8 @@
 import joblib
 from pathlib import Path
 from fastapi import APIRouter
+from src.model.prediction_request import PredictionRequest
+from src.model.prediction_responde import PredictionResponse
 router = APIRouter()
 
 RESOURCES_PATH = Path(__file__).parent / "resources"
