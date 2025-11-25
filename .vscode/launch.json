@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next: Dev (npm)",
+      "type": "pwa-node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/student-depression-app",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 9229,
+      "console": "integratedTerminal",
+      "env": {
+        "BROWSER": "none"
+      },
+      "serverReadyAction": {
+        "pattern": "http://localhost:3000",
+        "uriFormat": "http://localhost:3000",
+        "action": "openExternally"
+      }
+    },
+    {
+      "name": "Attach to Next (process)",
+      "type": "pwa-node",
+      "request": "attach",
+      "port": 9229,
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Python: Run API",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/student-depression-api/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/student-depression-api"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Run Full Stack (Next + API)",
+      "configurations": ["Next: Dev (npm)", "Python: Run API"]
+    }
+  ]
+}
