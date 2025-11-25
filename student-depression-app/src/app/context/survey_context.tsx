@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, Dispatch, Suspense, use, useReducer } from "react";
-import { QuestionRepository } from "../repository/question_respository";
+import { StudentDepressionRepositoryImp } from "../repository/student-depression-repository";
 import { QuestionBase } from "../model";
 
 type SurveyAction =
@@ -28,8 +28,8 @@ export function surveyReducer(questions: QuestionBase[], action: SurveyAction): 
 }
 
 export function SurveyProvider({ children }: { children: React.ReactNode }) {
-  const repo = QuestionRepository.instance;
-  const questions = repo.fetch();
+  const repo = StudentDepressionRepositoryImp.instance;
+  const questions = repo.getQuestions();
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
