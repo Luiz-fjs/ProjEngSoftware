@@ -1,4 +1,6 @@
-    
+from pydantic import BaseModel, Field
+from typing import List, Dict, Any
+
 class PredictionResponse(BaseModel):
     prediction: int
     probability: List[float]
