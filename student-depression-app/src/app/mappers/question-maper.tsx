@@ -7,7 +7,7 @@ import { QuestionBase } from '../model/question-base';
 
 export type RawQuestion = {
     type: string;
-    data: { [key: string]: string };
+    data: { [key: string]: string | string[] | number};
 }
 
 export function mapQuestions(raw: RawQuestion[]): QuestionBase[] {
@@ -21,12 +21,12 @@ export function mapQuestion(item: RawQuestion): QuestionBase | null {
         switch (type) {
             case 'alternative': {
                 const props: AlternativeQuestionInterface = {
-                    id: data.id,
-                    title: data.title,
-                    description: data.description ?? '',
-                    alternatives: data.alternatives ?? [],
-                    labels: data.labels ?? (data.alternatives ?? [])
-                } as any;
+                    id: data.id as string,
+                    title: data.title as string,
+                    description: (data.description ?? '') as string,
+                    alternatives: (data.alternatives ?? []) as string[],
+                    labels: (data.labels ?? (data.alternatives ?? [])) as string[],
+                };
 
                 const q = new AlternativeQuestion(props);
                 return new QuestionWithLayoutDecorator(q);
@@ -34,12 +34,12 @@ export function mapQuestion(item: RawQuestion): QuestionBase | null {
 
             case 'date': {
                 const props: DateQuestionInterface = {
-                    id: data.id,
-                    title: data.title,
-                    description: data.description ?? '',
-                    min: data.min,
-                    max: data.max,
-                } as any;
+                    id: data.id as string,
+                    title: data.title as string,
+                    description: (data.description ?? '') as string,
+                    min: data.min as string,
+                    max: data.max as string,
+                };
 
                 const q = new DateQuestion(props);
                 return new QuestionWithLayoutDecorator(q);
@@ -47,13 +47,13 @@ export function mapQuestion(item: RawQuestion): QuestionBase | null {
 
             case 'number': {
                 const props: NumberQuestionInterface = {
-                    id: data.id,
-                    title: data.title,
-                    description: data.description ?? '',
-                    placeholder: data.placeholder ?? '',
-                    min: data.min ?? 0,
-                    max: data.max ?? 0,
-                } as any;
+                    id: data.id as string,
+                    title: data.title as string,
+                    description: (data.description ?? '') as string,
+                    placeholder: (data.placeholder ?? '') as string,
+                    min: (data.min ?? 0) as number,
+                    max: (data.max ?? 0) as number,
+                };
 
                 const q = new NumberQuestion(props);
                 return new QuestionWithLayoutDecorator(q);
@@ -61,15 +61,15 @@ export function mapQuestion(item: RawQuestion): QuestionBase | null {
 
             case 'slider': {
                 const props: SliderQuestionInterface = {
-                    id: data.id,
-                    title: data.title,
-                    description: data.description ?? '',
-                    min: data.min,
-                    max: data.max,
-                    step: data.step,
-                    defaultValue: data.defaultValue,
-                    labels: data.labels,
-                } as any;
+                    id: data.id as string,
+                    title: data.title as string,
+                    description: (data.description ?? '') as string,
+                    min: data.min as number,
+                    max: data.max as number,
+                    step: data.step as number,
+                    defaultValue: data.defaultValue as number,
+                    labels: data.labels as string[],
+                };
 
                 const q = new SliderQuestion(props);
                 return new QuestionWithLayoutDecorator(q);
