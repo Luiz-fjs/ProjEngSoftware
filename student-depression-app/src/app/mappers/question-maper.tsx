@@ -78,7 +78,7 @@ export function mapQuestion(item: RawQuestion): QuestionBase | null {
             default:
                 return null;
         }
-    } catch (_){
+    } catch{
         // Em caso de dados inesperados, ignoramos a questão e retornamos null
         return null;
     }
