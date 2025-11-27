@@ -7,7 +7,7 @@ import { QuestionBase } from '../model/question-base';
 
 export type RawQuestion = {
     type: string;
-    data: any;
+    data: { [key: string]: string };
 }
 
 export function mapQuestions(raw: RawQuestion[]): QuestionBase[] {
