@@ -13,10 +13,10 @@ export class StudentDepressionRepositoryImp implements StudentDepressionReposito
     static instance = new StudentDepressionRepositoryImp();
 
     async getQuestions(): Promise<QuestionBase[]> {
-        let questionResponse = await fetch(`${BASE_URL}/questions`)
+        const questionResponse = await fetch(`${BASE_URL}/questions`)
         if (questionResponse.ok) {
-            let questionJson : RawQuestion[] = await questionResponse.json()
-            let questions = mapQuestions(questionJson)
+            const questionJson : RawQuestion[] = await questionResponse.json()
+            const questions = mapQuestions(questionJson)
             return questions
         }
 
