@@ -35,8 +35,8 @@ if (typeof document !== 'undefined') {
 }
 
 export default function Processing() {
-    const [loading, setLoading] = useState<boolean>(true);
-    const [predictResponse, setPredictResponse] = useState<SurveyPredictDepressionResponse | null>(null);
+    const [loading] = useState<boolean>(true);
+    const [predictResponse] = useState<SurveyPredictDepressionResponse | null>(null);
     const questions = useContext(SurveyQuestionContext);
     const answeredQuestions: Record<string, string | number> = questions
         .filter(q => q.response !== undefined && q.response !== null)
@@ -58,6 +58,10 @@ export default function Processing() {
             json[question.id] = question.response as string | number;
             return json;
         }, {} as Record<string, string | number>);
+
+    // Usado para depuração/evitar warning de variável não utilizada enquanto
+    // a integração com o serviço permanece comentada.
+    console.debug('answeredQuestions:', answeredQuestions);
 
     useEffect(() => {
         const fetchData = async () => {
