@@ -6,7 +6,7 @@ interface StudentDepressionRepository {
     getQuestions(): Promise<QuestionBase[]>
 }
 
-const BASE_URL = "https://projengsoftware-o465.onrender.com"
+const BASE_URL = "https://api-terapp-ia.onrender.com"
 
 export class StudentDepressionRepositoryImp implements StudentDepressionRepository {
     private constructor() { }
