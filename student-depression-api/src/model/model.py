@@ -1,6 +1,7 @@
 import joblib
 from pathlib import Path
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+import pandas as pd
 from src.model.prediction_request import PredictionRequest
 from src.model.prediction_response import PredictionResponse
 from typing import List, Dict, Any
@@ -260,8 +261,67 @@ except Exception as e:
     print(f"Erro ao carregar modelo: {e}")
     model = None
 
+@router.post("/predict", response_model=PredictionResponse)
+async def predict_depression(request: PredictionRequest):
+    # Verificar se os modelos foram carregados
+    if model is None:
+        raise HTTPException(
+            status_code=500, 
+            detail="Modelo ou scaler não carregados corretamente"
+        )
+    
+    try:
+        # Preparar dados do usuário
+        user_data = {
+            'gender': request.gender,
+            'age': request.age,
+            'academic_pressure': request.academic_pressure,
+            'cgpa': request.cgpa,
+            'study_satisfaction': request.study_satisfaction,
+            'sleep_duration': request.sleep_duration,
+            'dietary_habits': request.dietary_habits,
+            'suicidal_thoughts': request.suicidal_thoughts,
+            'work_study_hours': request.work_study_hours,
+            'financial_stress': request.financial_stress,
+            'family_history': request.family_history
+        }
 
+        # Preparar input para o modelo
+        model_input = {
+            "Gender": [request.gender],
+            "Age": [request.age],
+            "Academic Pressure": [request.academic_pressure],
+            "Study Satisfaction": [request.study_satisfaction],
+            "CGPA": [request.cgpa],
+            "Sleep Duration": [request.sleep_duration],
+            "Dietary Habits": [request.dietary_habits],
+            "Have you ever had suicidal thoughts ?": [request.suicidal_thoughts],
+            "Work/Study Hours": [request.work_study_hours],
+            "Financial Stress": [request.financial_stress],
+            "Family History of Mental Illness": [request.family_history]
+        }
 
-@router.get("/example")
-async def example_route():
-    return {"message": "This is an example route from model.py"}
+        Y_input = pd.DataFrame(model_input)
+        
+        # Fazer a predição
+        prediction = model.predict(Y_input)[0]
+        prediction_proba = model.predict_proba(Y_input)[0]
+        
+        # Determinar o risco de depressão
+        depression_risk = "Depressivo" if prediction == 1 else "Não depressivo"
+        
+        # Gerar feedback detalhado para todas as features
+        feature_feedback = generate_feature_feedback(user_data)
+        
+        return PredictionResponse(
+            prediction=int(prediction),
+            probability=prediction_proba.tolist(),
+            depression_risk=depression_risk,
+            feature_feedback=feature_feedback,
+        )
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Erro ao processar predição: {str(e)}"
+        )

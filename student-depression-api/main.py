@@ -9,7 +9,7 @@ from src.model.model import router as model_router
 from src.model.questions import router as questions_router
 
 origins = [
-        "http://localhost:3000"
+        "http://localhost:3000",
         "https://projengsoftware-o465.onrender.com/"
     ]
 
