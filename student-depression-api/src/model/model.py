@@ -6,7 +6,8 @@ from src.model.prediction_response import PredictionResponse
 from typing import List, Dict, Any
 router = APIRouter()
 
-RESOURCES_PATH = Path(__file__).parent / "resources"
+
+RESOURCES_PATH = Path(__file__).parent.parent / "resources"
 MODEL_PATH = RESOURCES_PATH / "student-depression-svm.joblib"
 
 # Importância das features baseada na análise real do modelo SVM não linear (Obtidas por script executado no notebook)
