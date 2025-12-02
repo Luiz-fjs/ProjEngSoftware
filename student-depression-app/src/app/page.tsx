@@ -13,7 +13,7 @@ export default function Home() {
         {/* Title Section */}
         <div className="text-center mb-12 max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-6 leading-tight">
-            Avaliação de Risco de Depressão Estudantil
+            Terapp.IA
           </h1>
         </div>
 

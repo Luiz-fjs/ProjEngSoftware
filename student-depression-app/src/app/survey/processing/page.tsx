@@ -8,6 +8,7 @@ import SurveyFeedback from "../../../../public/svgs/survey-feedback";
 import Link from "next/dist/client/link";
 import { SurveyPredictDepressionResponse } from "@/app/model/survey_predict_depression_response";
 import DetailedFeedback from "../component/detailed_feedback";
+import { StudentDepressionRepositoryImp } from "@/app/repository/student-depression-repository";
 
 // Adicionar estilos CSS customizados
 const customStyles = `
@@ -29,15 +30,16 @@ const customStyles = `
 
 // Adicionar estilos ao head
 if (typeof document !== 'undefined') {
-  const styleSheet = document.createElement("style");
-  styleSheet.innerText = customStyles;
-  document.head.appendChild(styleSheet);
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = customStyles;
+    document.head.appendChild(styleSheet);
 }
 
 export default function Processing() {
-    const [loading] = useState<boolean>(true);
-    const [predictResponse] = useState<SurveyPredictDepressionResponse | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [predictResponse, setPredictResponse] = useState<SurveyPredictDepressionResponse | null>(null);
     const questions = useContext(SurveyQuestionContext);
+    const repository = StudentDepressionRepositoryImp.instance;
     const answeredQuestions: Record<string, string | number> = questions
         .filter(q => q.response !== undefined && q.response !== null)
         .sort((a, b) => Number.parseInt(a.id) - Number.parseInt(b.id))
@@ -65,17 +67,15 @@ export default function Processing() {
 
     useEffect(() => {
         const fetchData = async () => {
-
-            /*
             try {
-                const response: SurveyPredictDepressionResponse = await SurveyService.requestFeedback(answeredQuestions)
+                const response: SurveyPredictDepressionResponse = await repository.requestFeedback(answeredQuestions);
+
                 setPredictResponse(response);
                 setLoading(false);
 
             } catch (error) {
                 console.error('Error fetching depression prediction:', error);
-
-            }*/
+            }
         }
 
         fetchData();
@@ -112,21 +112,21 @@ export default function Processing() {
                     <div className="inline-block mb-6">
                         <SurveyFeedback className="w-24 h-24 mx-auto" />
                     </div>
-                    
+
                     <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 dark:border-gray-700/20">
                         <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
                             Resultado da Análise
                         </h1>
-                        
+
                         <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
                             Suas chances de ter depressão são
                         </p>
-                        
+
                         <div className="relative">
                             <p className="text-7xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent animate-pulse">
-                                {((predictResponse?.probability[1] ?? 0)*100)?.toFixed(1)}%
+                                {((predictResponse?.probability[1] ?? 0) * 100)?.toFixed(1)}%
                             </p>
-                            
+
                             {/* Risk Level Indicator */}
                             <div className="mt-4">
                                 {(() => {
@@ -162,7 +162,7 @@ export default function Processing() {
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center">
                             Análise Detalhada dos Fatores
                         </h2>
-                        <DetailedFeedback featureFeedback={predictResponse?.feature_feedback ?? []}/>
+                        <DetailedFeedback featureFeedback={predictResponse?.feature_feedback ?? []} />
                     </div>
                 </div>
 

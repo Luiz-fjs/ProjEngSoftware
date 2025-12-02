@@ -23,9 +23,9 @@ export class StudentDepressionRepositoryImp implements StudentDepressionReposito
         return []
     }
 
-    static async requestFeedback(responses: Record<string, string | number>): Promise<SurveyPredictDepressionResponse> {
+    async requestFeedback(responses: Record<string, string | number>): Promise<SurveyPredictDepressionResponse> {
         try {
-            const response = await fetch(`${BASE_URL}/predict`, {
+            const response = await fetch(`${BASE_URL}/model/predict`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
