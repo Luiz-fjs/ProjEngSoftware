@@ -7,6 +7,7 @@ from src.model.prediction_response import PredictionResponse
 from typing import List, Dict, Any
 router = APIRouter()
 
+
 RESOURCES_PATH = Path(__file__).parent.parent / "resources"
 MODEL_PATH = RESOURCES_PATH / "student-depression-svm.joblib"
 
