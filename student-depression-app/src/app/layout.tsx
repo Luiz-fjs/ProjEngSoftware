@@ -24,6 +24,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={dark ? "dark" : ""}>
+      <title>Terapp.IA</title>
       <body
         className={`dark:bg-black ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
