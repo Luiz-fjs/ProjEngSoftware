@@ -1,3 +1,4 @@
+![App name](/images/terappia_name.png)
 ## Integrantes: <br/>
   - Luiz Felipe 170.294 <br/>
   - Laura Tomasin Barbosa 163.884 <br/>
@@ -8,6 +9,8 @@
 ## Projeto:
   O Terapp.IA é uma aplicação que combinará análise preditiva de Machine Learning com uma interface web intuitiva para avaliar fatores de risco de depressão em estudantes. O sistema usará a analise de múltiplas variáveis psicossociais e acadêmicas para fornecer insights personalizados e feedback detalhado.
 
+## Visão geral do projeto
+![General architecture](/images/terappia_geral_arch.png)
   
 ## Tech Stack
   #### Front-end:
