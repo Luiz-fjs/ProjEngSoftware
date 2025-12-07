@@ -11,7 +11,12 @@
 
 ## Visão geral do projeto
 ![General architecture](/images/terappia_geral_arch.png)
-  
+
+### Protótipo no Figma  
+<a href="https://www.figma.com/design/VRxuzMZySmUrqWpRSeHHk7/Projeto-EngenhariadeSoftware?node-id=0-1&p=f&t=xfqKJBAuqdWSb6hc-0">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" width="60">
+</a>
+
 ## Tech Stack
   #### Front-end:
 | Tecnologia | Versão | Descrição |
