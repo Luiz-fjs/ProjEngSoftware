@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, Dispatch, Suspense, use, useReducer } from "react";
+import { createContext, Dispatch, useEffect, useReducer, useState } from "react";
 import { StudentDepressionRepositoryImp } from "../repository/student-depression-repository";
 import { QuestionBase } from "../model";
 
@@ -29,20 +29,25 @@ export function surveyReducer(questions: QuestionBase[], action: SurveyAction): 
 
 export function SurveyProvider({ children }: { children: React.ReactNode }) {
   const repo = StudentDepressionRepositoryImp.instance;
-  const questions = repo.getQuestions();
+  const [initQuestions, surveyDispatch] = useReducer(surveyReducer, [] as QuestionBase[]);
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <SurveyConsumer questions={questions}>
-        {children}
-      </SurveyConsumer>
-    </Suspense>
-  )
-}
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      try {
+        const qs = await repo.getQuestions();
+        if (!active) return;
+        surveyDispatch({ type: 'save_fetch', questions: qs });
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    load();
+    return () => { active = false; };
+  }, [repo]);
 
-export function SurveyConsumer({ children, questions }: { children: React.ReactNode, questions: Promise<QuestionBase[]> }) {
-  const allQuestions = use(questions);
-  const [initQuestions, surveyDispatch] = useReducer(surveyReducer, allQuestions);
+  if (loading) return <p>Loading...</p>;
 
   return (
     <SurveyQuestionContext.Provider value={initQuestions}>
@@ -50,6 +55,5 @@ export function SurveyConsumer({ children, questions }: { children: React.ReactN
         {children}
       </SurveyDispatchContext.Provider>
     </SurveyQuestionContext.Provider>
-
-  )
-} 
+  );
+}
